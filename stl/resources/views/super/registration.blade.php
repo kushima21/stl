@@ -69,6 +69,7 @@
             </div>
                 <div class="registration-form">
                     <form method="POST" action="{{ route('register.store') }}">
+                        <h1>adada</h1>
                         @csrf
                         <label for="completeName">Complete Name:</label>
                         <input type="text" name="completeName" id="completeName" placeholder="Complete Name" required>
