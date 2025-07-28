@@ -35,9 +35,10 @@
             <div class="manage-container">
                 <span>Manage</span>
                 <nav class="manage-links">
-                    <div class="link"><a href="">Admin Dashboard</a></div>
-                    <div class="link"><a href="">Generate Results</a></div>
+                    <div class="link"><i class="fa fa-home"></i><a href="">Admin Dashboard</a></div>
+                    <div class="link"><i class="fa fa-calendar"></i><a href="">Generate Results</a></div>
                     <div class="link">
+                        <i class="fa fa-user"></i>
                         <a href="{{ url('/registrations') }}">Registrations</a>
                     </div>
                 </nav>
@@ -69,7 +70,7 @@
             </div>
                 <div class="registration-form">
                     <form method="POST" action="{{ route('register.store') }}">
-                        <h1>adada</h1>
+                        
                         @csrf
                         <label for="completeName">Complete Name:</label>
                         <input type="text" name="completeName" id="completeName" placeholder="Complete Name" required>

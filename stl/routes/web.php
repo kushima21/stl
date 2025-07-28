@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegistrationController;
 
 Route::get('/', function () {
-    return view('layout.default');
+    return view('index');
 });
 
 Route::get('/registrations', function () {

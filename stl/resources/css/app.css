@@ -1,5 +1,8 @@
-@import 'tailwindcss';
-@import 'tw-animate-css';
+@import "bootstrap/dist/css/bootstrap.min.css";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
@@ -163,4 +166,11 @@
     body {
         @apply bg-background text-foreground;
     }
+}
+
+
+/* You can add your own custom styles below */
+
+.login-box h2 {
+    font-size: 22px;
 }
