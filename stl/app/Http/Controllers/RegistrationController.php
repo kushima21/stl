@@ -3,16 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Registration;
 use Illuminate\Support\Facades\Hash;
+use App\Models\Registration;
 
 class RegistrationController extends Controller
 {
     public function index()
-{
-    $registrations = Registration::all(); // fetch all registration records
-    return view('super.registration', compact('registrations'));
-}
+    {
+        $registrations = Registration::all();
+        return view('super.registration', compact('registrations'));
+    }
+
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -26,18 +27,66 @@ class RegistrationController extends Controller
             'position'       => 'required|string|in:superAdmin,admin',
         ]);
 
-       Registration::create([
-        'complete_name'  => $validated['completeName'],
-        'username'       => $validated['username'],
-        'phone_number'   => $validated['phoneNumber'],
-        'password'       => Hash::make($validated['password']),
-        'location'       => $validated['location'],
-        'area_location'  => $validated['areaLocation'],
-        'area_name'      => $validated['areaName'],
-        'position'       => $validated['position'],
-        'status'         => 'active', // set default manually here
-    ]);
+        Registration::create([
+            'complete_name'  => $validated['completeName'],
+            'username'       => $validated['username'],
+            'phone_number'   => $validated['phoneNumber'],
+            'password'       => Hash::make($validated['password']),
+            'location'       => $validated['location'],
+            'area_location'  => $validated['areaLocation'],
+            'area_name'      => $validated['areaName'],
+            'position'       => $validated['position'],
+            'status'         => 'active',
+        ]);
 
         return redirect()->back()->with('success', 'Account created successfully!');
     }
+
+    // ✅ Add login logic here
+    public function showLoginForm()
+    {
+        return view('index');
+    }
+
+    // Handle login
+    public function login(Request $request)
+    {
+        $request->validate([
+            'username' => 'required',
+            'password' => 'required',
+        ]);
+
+        $user = Registration::where('username', $request->username)->first();
+
+        if ($user && Hash::check($request->password, $user->password)) {
+            // Save session
+            session([
+                'logged_in' => true,
+                'user_id' => $user->id,
+                'username' => $user->username,
+            ]);
+
+            return redirect()->route('dashboard');
+        }
+
+        return back()->with('error', 'Invalid username or password.');
+    }
+
+    // Show dashboard
+    public function dashboard()
+    {
+        if (!session()->has('logged_in')) {
+            return redirect()->route('login');
+        }
+
+        return view('dashboard'); // create dashboard.blade.php
+    }
+
+    // Handle logout
+    public function logout(Request $request)
+    {
+        session()->flush();
+        return redirect()->route('login');
+    }
+    
 }

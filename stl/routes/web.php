@@ -3,13 +3,20 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegistrationController;
 
-Route::get('/', function () {
-    return view('index');
-});
+// ✅ Show login page
+Route::get('/', [RegistrationController::class, 'showLoginForm'])->name('login');
 
-Route::get('/registrations', function () {
-    return view('super.registration');
-});
+// ✅ Handle login form
+Route::post('/login', [RegistrationController::class, 'login'])->name('login.process');
 
+// ✅ Redirect after login using layout
+Route::get('/dashboard', [RegistrationController::class, 'dashboard'])->name('dashboard');
+
+// ✅ Handle logout
+Route::post('/logout', [RegistrationController::class, 'logout'])->name('logout');
+
+// ✅ Register new user
 Route::post('/register', [RegistrationController::class, 'store'])->name('register.store');
-Route::get('/registrations', [RegistrationController::class, 'index']);
+
+// ✅ Admin only - view all registrations
+Route::get('/registrations', [RegistrationController::class, 'index'])->name('registrations.index');
