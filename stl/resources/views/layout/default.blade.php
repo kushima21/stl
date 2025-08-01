@@ -44,6 +44,7 @@
                 <a href="#">
                     <div class="manage-links">
                         <i class="fa fa-clock"></i>
+                        <h2>Admin Dashboard</h2>
                     </div>
                 </a>
                 <a href="#">
@@ -52,7 +53,7 @@
                         <h2>Generate Results</h2>
                     </div>
                 </a>
-                <a href="#">
+                <a href="{{ url('/registrations') }}">
                     <div class="manage-links">
                          <i class="fa fa-user"></i>
                          <h2>Registrations</h2>

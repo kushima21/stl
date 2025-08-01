@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,6 +7,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>STL</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="/your-path-to-uicons/css/uicons-[your-style].css" rel="stylesheet"> <!--load all styles -->
+    @vite(['resources/css/default.css', 'resources/js/app.js'])
+    @vite(['resources/css/registration.css', 'resources/js/app.js'])
     <link rel="icon" type="image/png" href="{{ asset('system-image/ckcm.png') }}">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,100..1000&display=swap" rel="stylesheet">
@@ -14,98 +18,123 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <div class="container">
-    <!-- Left content goes here -->
-    <div class="left-container" id="leftContainer">
-        <div class="left-header">
-            <img src="{{ asset('system-image/ckcm.png') }}" alt="Logo" style="width: 40px; height: 40px;">
-            <h2>Lotto ni Choy</h2>
-            <span>V2.1o1.I0t</span>
-        </div>
-        <div class="link-container">
-            <div class="link-profile" id="profileToggle">
-                <img src="{{ asset('system-image/user.png') }}" alt="Profile" style="width: 35px; height: 35px; border-radius: 50%; margin: 10px;">
-                <div class="profile-info">
-                    <span>Choy</span>
-                    <p>Administrator</p>
+    <div class="default-main-container">
+        <div class="left-default-box">
+            <div class="left-header">
+                <img src="{{ asset('image/ckcm.png') }}">
+                <h2>Lotto ni Choy <span>v1.03.20.2025</span></h2>
+            </div>
+            <div class="left-dashboard-link">
+                <div class="user-box-container">
+                    <img src="{{ asset('image/user.png') }}">
+                    <div class="user-info">
+                        <h4>Hondrada John Mark</h4>
+                        <span>ID#: 20003</span>
+                    </div>
                 </div>
             </div>
-            <div class="profile-settings" id="profileSettings" style="display: none;"></div>
-            <div class="home-container"><span>Dashboard Overview</span></div>
-            <div class="manage-container">
-                <span>Manage</span>
-                <nav class="manage-links">
-                    <div class="link"><i class="fa fa-home"></i><a href="">Admin Dashboard</a></div>
-                    <div class="link"><i class="fa fa-calendar"></i><a href="">Generate Results</a></div>
-                    <div class="link">
-                        <i class="fa fa-user"></i>
-                        <a href="{{ url('/registrations') }}">Registrations</a>
+            <div class="user-box"></div>
+            <a href="#">
+                <div class="dashboard-link-container">
+                    <i class="fa fa-home"></i>
+                    <h2>Dashboard Overviews</h2>
+                </div>
+            </a>
+            <h2 class="header-manage">Manage</h2>
+            <div class="manage-container-box">
+                <a href="#">
+                    <div class="manage-links">
+                        <i class="fa fa-clock"></i>
+                        <h2>Admin Dashboard</h2>
                     </div>
-                </nav>
+                </a>
+                <a href="#">
+                    <div class="manage-links">
+                        <i class="fa fa-book"></i>
+                        <h2>Generate Results</h2>
+                    </div>
+                </a>
+                <a href="{{ url('/registrations') }}">
+                    <div class="manage-links">
+                         <i class="fa fa-user"></i>
+                         <h2>Registrations</h2>
+                    </div>
+                </a>
             </div>
         </div>
-    </div>
+        <div class="right-default-box">
 
-    <!-- Right content goes here -->
-    <div class="right-container" id="rightContainer">
-        <div class="right-header">
-            <i class="fa fa-bars" id="menuToggle"></i>
-            <i class="fa fa-bell"></i>
-        </div>
-        <div class="content-container">
-            <h2>Registrations</h2>
-            <div class="addBtn">
-                <button type="button"id="openModalBtn" >Create New Account</button>
+            <div class="right-header">
+                <i class="fa fa-bars" id="menuToggle"></i>
+                <i class="fa fa-bell"></i>
             </div>
-        </div>
-        <div class="searchBar" id="">
-            <form method="GET" action="">
-                <i class="fas fa-search"></i>
-                <input type="text" name="" placeholder="Quick Search" id="tableSearchInput">
-            </form>
-        </div>
-        <div class="registration-container">
-            <div class="registration-header">
-                <h2>Create Account</h2>
-            </div>
-                <div class="registration-form">
-                    <form method="POST" action="{{ route('register.store') }}">
-                        
-                        @csrf
-                        <label for="completeName">Complete Name:</label>
-                        <input type="text" name="completeName" id="completeName" placeholder="Complete Name" required>
-                        <label for="username">User Name:</label>
-                        <input type="text" name="username" id="username" placeholder="User Name" value="" required>
-                        <label for="phoneNumber">Phone Number:</label>
-                        <input type="number" name="phoneNumber" id="phoneNumber" placeholder="Phone Number" value=""
-                         required maxlength="11" oninput="this.value = this.value.slice(0, 11);">
-                        <label for="password">Password:</label>
-                        <input type="password" name="password" id="password" placeholder="Password" value="" required>
-                       <label for="location">Location (Per Province):</label>
-                        <select name="location" id="location" required>
+
+            <div class="registration-content-container">
+                <div class="registration-header">
+                    <h2>Registrations</h2>
+                    <button type="button" id="openModalBtn">Create New One</button>
+                </div>
+                <div class="searchBar" id="">
+                    <form method="GET" action="">
+                        <i class="fas fa-search"></i>
+                        <input type="text" name="" placeholder="Quick Search" id="tableSearchInput">
+                    </form>
+                </div>
+
+                <div class="registration-container">
+                    <h2 class="create-header">Register New Account</h2>
+
+                    <div class="registration-form">
+                        <form method="POST" action="">
+                            @csrf
+                            <label for="completeName">Complete Name</label>
+                            <br>
+                            <input type="text" name="completeName" id="completeName" placeholder="Complete Name" required>
+                            <br>
+                            <label for="username">Username</label>
+                            <br>
+                            <input type="text" name="username" id="username" placeholder="Username" required>
+                            <br>
+                            <label for="phoneNumber">Phone Number:</label>
+                            <br>
+                            <input type="number" name="phoneNumber" id="phoneNumber" placeholder="Phone Number" value=""
+                            required maxlength="11" oninput="this.value = this.value.slice(0, 11);">
+                            <br>
+                            <label for="password">Password:</label>
+                            <br>
+                            <input type="password" name="password" id="password" placeholder="Password" value="" required>
+                            <br>
+                            <label for="location">Location (Per Province):</label>
+                            <br>
+                            <select name="location" id="location" required>
                             <option value="">-- Select Province --</option>
-                        </select>
-                        <label for="areaLocation">Area Location (Per Municipality)</label>
-                        <select name="areaLocation" id="areaLocation" required>
+                            </select>
+                            <br>
+                            <label for="areaLocation">Area Location (Per Municipality)</label>
+                            <br>
+                             <select name="areaLocation" id="areaLocation" required>
                             <option value="">-- Select Municipality --</option>
-                        </select>
-                        <label for="areaName">Area Name:</label>
-                        <input type="text" name="areaName" id="areaName" placeholder="Area Name" value="" required>
-                        <label for="position">Position:</label>
-                        <select name="position">
+                            </select>
+                            <br>
+                            <label for="areaName">Area Name:</label>
+                            <br>
+                            <input type="text" name="areaName" id="areaName" placeholder="Area Name" value="" required>
+                            <br>
+                            <label for="position">Position:</label>
+                            <br>
+                            <select name="position">
                             <option value="">--Select Position--</option>
                             <option value="superAdmin">Super Admin</option>
                             <option value="admin">Admin</option>
-                        </select>
-                        <div class="registrationBTn">
-                            <button type="submit">Submit</button>
-                            <button type="button" id="closeModalBtn">Cancel</button>
-                        </div>
-                    </form>
+                            </select>
+                            <div class="registrationBTn">
+                                <button type="submit">Submit</button>
+                                <button type="button" id="closeModalBtn">Cancel</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-        </div>
-            <div class="registration-account-container">
-            <table class="registration-table">
+                <table class="registration-table">
                 <thead>
                     <tr>
                         <th>Fullname</th>
@@ -139,368 +168,10 @@
                 </tbody>
             </table>
             </div>
+            </div>
+        </div>
     </div>
-</div>
 
-   <style>
-    * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-    }
-
-    body, html {
-        width: 100%;
-        height: 100vh;
-        font-family: 'Roboto Flex', sans-serif;
-    }
-
-    .container {
-        width: 100%;
-        height: 100vh;
-        background-color: var(--ckcm-color1);
-        display: flex;
-        flex-direction: row;
-    }
-
-    /*left container */
-
-    .left-container {
-    width: 20%;
-    height: 100%;
-    box-shadow: 0px 0px 0px 1px black;
-    background-color: #fff;
-    display: flex;
-    flex-direction: column; /* so header + link-container stack vertically */
-}
-
-    .left-header {
-        width: 100%;
-        height: 60px;
-        box-shadow: 0px 0px 0px 1px black;
-        display: flex;
-        align-items: center;
-    }
-    .left-header img {
-        margin-left: 10px;
-    }
-     .left-header h2 {
-        margin-left: 10px;
-        font-size: 20px;
-        color: #333; /* optional */
-     }
-
-      .left-header span {
-        margin-left: auto; /* This pushes the version number to the right */
-        margin-right: 15px; /* Add some space from the right edge */
-        font-size: 13px;
-        color: #666; /* optional */
-      }
-
-       
-    .link-container {
-        width: 100%;
-        flex: 1; /* takes remaining vertical space */
-        overflow-y: auto;
-    }
-
-    .link-profile {
-        margin-top: 10px;
-        margin-left: 5px;
-        width: 95%;
-        height: 45px;
-        display: flex;
-        align-items: center;
-        cursor: pointer;
-        border-radius: 14px; 
-    }
-
-    .profile-info span {
-        margin-left: 5px;
-        font-size: 14px;
-        font-weight: bold;
-        color: #333; /* optional */
-    }
-     .profile-info p {
-        margin-left: 5px;
-        font-size: 14px;
-        color: #666; /* optional */
-     }
-
-       .link-profile:hover {
-        background: gray;
-       }
-
-        .profile-settings {
-        width: 19%;
-        height: 150px;
-        box-shadow: 0px 0px 0px 1px black;
-        margin-left: 5px;
-        margin-top: 5px;
-        position: fixed;
-        border-radius: 12px;
-        background-color: white;
-        z-index: 1000;
-    }
-    .home-container {
-        width: 95%;
-        height: 30px;
-        box-shadow: 0px 0px 0px 1px black;
-        margin-top: 10px;
-        margin-left: 5px;
-        border-radius: 5px;
-        display: flex;
-        align-items: center;
-        padding-left: 10px;
-    }
-
-    .home-container span {
-        font-size: 14px;
-    }
-
-    .manage-container {
-        width: 100%;
-        min-height: 70%;
-        margin-top: 5px;
-        overflow-y: scroll;
-        padding-left: 5px;
-        padding-top: 5px;
-        margin-top: 5px;
-    }
-    .manage-container span {
-        font-size: 14px;
-    }
-
-    .manage-links {
-        width: 100%;
-        height: 100%;
-        margin-top: 5px;
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-    }
-
-    .link {
-        width: 98%;
-        height: 35px;
-        box-shadow: 0px 0px 0px 1px black;
-        display: flex;
-        align-items: center;
-        border-radius: 5px;
-        padding-left: 5px;
-    }
-     .link a {
-        text-decoration: none;
-        font-size: 14px;
-     }
-      .link:hover {
-        background: rgb(199, 201, 206);
-        color: white;
-      }
-
-
-    /*right container */
-
-    .right-container {
-    width: 80%;
-    height: 100%;
-    background-color: #f0f0f0; /* optional */
-    }
-    .right-container.expanded {
-    width: 100% !important;
-}
-
-    .right-header {
-        width: 100%;
-        height: 35px;
-        box-shadow: 0px 0px 0px 1px black;
-        display: flex;
-        align-items: center;
-        justify-content: space-between; /* This spaces the icons apart */
-        padding: 0 10px; /* Add padding so icons don't stick to edges */
-    }
-
-    .right-header i {
-        font-size: 20px;
-        color: #333; /* optional */
-    }
-
-    .searchBar {
-        padding-left: 20px;
-    }
-     .searchBar input {
-        width: 250px;
-        height:30px;
-        padding-left: 5px;
-        border-radius: 5px;
-        border: none;
-     }
-
-    .content-container {
-        width: 100%;
-        height: auto;
-        display: flex;
-        justify-content: space-between;
-        margin-top: 5px;
-        padding: 5px 20px;
-    }
-
-      .content-container h2 {
-        font-size: 21px;
-        font-weight: 500;
-      }
-
-      .addBtn button{
-        width: 150px;
-        height: 38px;
-        border-radius: 12px;
-        border: none;
-        color: black;
-        font-size: 12px;
-        background: linear-gradient(rgb(153, 3, 3), rgb(112, 2, 2));
-        color: white;
-    }
-
-      .addBtn button:hover {
-        background: linear-gradient(rgb(153, 3, 3), rgb(112, 2, 2));
-        cursor: pointer;
-        color: white;
-        font-size: 12px;
-      }
-
-    .registration-container {
-    width: 600px;
-    height: max-content;
-    box-shadow: 0px 0px 0px 1px black;
-    position: fixed;
-    top: 50%;
-    left: 60%;
-    transform: translate(-50%, -50%);
-    background-color: white;
-    z-index: 999;
-    border-radius: 10px;
-    padding: 10px; /* Optional spacing */
-    box-sizing: border-box;
-    display: none;
-}
-.registration-header {
-    width: 98%;
-    height: 50px;
-    position: fixed;
-}
-.registration-header h2 {
-  display: flex;
-    justify-content: center;
-    font-weight: 500;
-    font-size: 20px;
-}
-
-
-.registration-form {
-    margin-top: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: start;
-    height: 100%;
-    padding: 10px 0;
-    overflow-y: auto; /* Just in case content goes beyond 450px */
-}
-
-.registration-form form {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    padding: 0 20px;
-    gap: 8px;
-}
-
-.registration-form form input,
-.registration-form form select {
-    padding: 6px;
-    font-size: 14px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-.registrationBTn {
-    width: 100%;
-    height: auto;
-    justify-content: space-between;
-    align-content: center;
-    display: flex;
-    margin-top: 5px;
-}
-.registrationBTn button {
-    width: 85px;
-    height: 32px;
-    margin-left: 20px;
-    margin-right: 20px;
-    border-radius: 8px;
-}
-
-
-
-    /* ✅ Responsive adjustment for tablets */
-    @media (max-width: 768px) {
-        .left-container {
-            width: 50%;
-        }   
-    }
-
-    /* ✅ Responsive adjustment for mobile phones */
-    @media (max-width: 480px) {
-        .container {
-            flex-direction: column;
-        }
-
-        .left-container {
-            width: 100%;
-            height: auto;
-            box-shadow: none;
-        }
-
-        .right-container {
-            width: 100%;
-            height: auto;
-        }
-    }
-</style>
-<style>
-.registration-account-container {
-    width: 100%;
-    overflow-x: auto;
-    box-sizing: border-box;
-    padding: 10px;
-}
-
-.registration-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-.registration-table th,
-.registration-table td {
-    border: 1px solid #ccc;
-    padding: 10px;
-    text-align: left;
-}
-
-
-.registration-table th {
-    background-color: #f5f5f5;
-    font-size: 12px;
-    font-weight: 500;
-}
-.registration-table td {
-    font-size: 12px;
-}
-
-.registration-table td button {
-    margin-right: 5px;
-    padding: 5px 10px;
-    cursor: pointer;
-}
-</style>
 <script>
 // Full list of provinces (81 total) and some sample municipalities
 const phData = {
@@ -646,6 +317,24 @@ provinceDropdown.addEventListener("change", function() {
     });
 </script>
 <script>
+    const menuToggle = document.getElementById('menuToggle');
+    const sidebar = document.querySelector('.left-default-box');
+    const rightBox = document.querySelector('.right-default-box');
+
+    // Toggle sidebar
+    menuToggle.addEventListener('click', (e) => {
+        e.stopPropagation(); // Prevent bubbling to document
+        sidebar.classList.toggle('active');
+    });
+
+    // Close sidebar when clicking outside (right side)
+    document.addEventListener('click', (e) => {
+        if (sidebar.classList.contains('active') && !sidebar.contains(e.target) && !menuToggle.contains(e.target)) {
+            sidebar.classList.remove('active');
+        }
+    });
+</script>
+<script>
 document.getElementById('tableSearchInput').addEventListener('input', function () {
     const filter = this.value.toLowerCase();
     const rows = document.querySelectorAll('.registration-table tbody tr');
@@ -656,5 +345,6 @@ document.getElementById('tableSearchInput').addEventListener('input', function (
     });
 });
 </script>
+
 </body>
 </html>
