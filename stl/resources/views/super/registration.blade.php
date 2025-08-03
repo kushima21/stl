@@ -34,7 +34,7 @@
                 </div>
             </div>
             <div class="user-box"></div>
-            <a href="#">
+            <a href="{{ url('dashboard') }}">
                 <div class="dashboard-link-container">
                     <i class="fa fa-home"></i>
                     <h2>Dashboard Overviews</h2>
@@ -85,7 +85,7 @@
                     <h2 class="create-header">Register New Account</h2>
 
                     <div class="registration-form">
-                        <form method="POST" action="">
+                        <form method="POST" action="{{ route('register.store') }}">
                             @csrf
                             <label for="completeName">Complete Name</label>
                             <br>
