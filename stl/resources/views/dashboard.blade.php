@@ -1,10 +1,9 @@
 @extends('layout.default')
 
 @section('content')
-    <h2>Hello, {{ session('username') }}</h2>
-
-    <form action="{{ route('logout') }}" method="POST">
-        @csrf
-        <button type="submit">Logout</button>   
-    </form>
+    
+     <div class="right-content-container">
+        <h2>Welcome to Lotto ni Choy</h2>
+        <span>Super Admin Dashboard</span>
+    </div>
 @endsection

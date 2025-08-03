@@ -20,4 +20,5 @@ Route::post('/register', [RegistrationController::class, 'store'])->name('regist
 
 // ✅ Admin only - view all registrations
 Route::get('/registrations', [RegistrationController::class, 'index'])->name('registrations.index');
+Route::post('/logout', [RegistrationController::class, 'logout'])->name('logout');
 

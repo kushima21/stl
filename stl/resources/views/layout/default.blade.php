@@ -21,19 +21,34 @@
         <div class="left-default-box">
             <div class="left-header">
                 <img src="{{ asset('image/ckcm.png') }}">
-                <h2>Lotto ni Choy <span>v1.03.20.2025</span></h2>
+                <h2>Lotto ni Choy <span>v1.01.20.2025</span></h2>
             </div>
             <div class="left-dashboard-link">
                 <div class="user-box-container">
                     <img src="{{ asset('image/user.png') }}">
-                    <div class="user-info">
-                        <h4>Hondrada John Mark</h4>
-                        <span>ID#: 20003</span>
-                    </div>
+                    @if(isset($globalUser))
+                        <div class="user-info">
+                            <h4>{{ $globalUser->complete_name }}</h4>
+                            <span>ID#: {{ $globalUser->id }}</span>
+                        </div>
+                    @endif
                 </div>
             </div>
-            <div class="user-box"></div>
-            <a href="#">
+           <div class="user-box">
+                <a href="{{ route('logout') }}"
+                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    <div class="user-settings">
+                        <i class="fa fa-sign-out-alt"></i>
+                        <h2>Logout</h2>
+                    </div>
+                </a>
+
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
+            </div>
+
+            <a href="{{ url('dashboard') }}">
                 <div class="dashboard-link-container">
                     <i class="fa fa-home"></i>
                     <h2>Dashboard Overviews</h2>
@@ -66,10 +81,7 @@
                 <i class="fa fa-bars" id="menuToggle"></i>
                 <i class="fa fa-bell"></i>
             </div>
-            <div class="right-content-container">
-                <h2>Welcome to Lotto ni Choy</h2>
-                <span>Super Admin Dashboard</span>
-            </div>
+            @yield('content')
         </div>
     </div>
 
@@ -235,6 +247,25 @@ provinceDropdown.addEventListener("change", function() {
         }
     });
 </script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const toggleButton = document.querySelector('.user-box-container');
+        const userBox = document.querySelector('.user-box');
+
+        toggleButton.addEventListener('click', function (e) {
+            e.stopPropagation(); // prevent event bubbling
+            userBox.style.display = userBox.style.display === 'block' ? 'none' : 'block';
+        });
+
+        // Optional: hide user-box if clicked outside
+        document.addEventListener('click', function (e) {
+            if (!userBox.contains(e.target) && !toggleButton.contains(e.target)) {
+                userBox.style.display = 'none';
+            }
+        });
+    });
+</script>
+
 
 </body>
 </html>

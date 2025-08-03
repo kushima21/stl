@@ -20,4 +20,7 @@ class Registration extends Model
         'position',
         'status',
     ];
+    
 }
+
+

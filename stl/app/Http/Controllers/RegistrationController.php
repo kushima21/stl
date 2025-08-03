@@ -73,14 +73,18 @@ class RegistrationController extends Controller
     }
 
     // Show dashboard
-    public function dashboard()
-    {
-        if (!session()->has('logged_in')) {
-            return redirect()->route('login');
-        }
-
-        return view('dashboard'); // create dashboard.blade.php
+public function dashboard()
+{
+    if (!session()->has('logged_in')) {
+        return redirect()->route('login');
     }
+
+    $user = Registration::find(session('user_id')); // get current user
+    return view('dashboard', [
+        'user' => $user,
+    ]);
+}
+
 
     // Handle logout
     public function logout(Request $request)
@@ -90,3 +94,4 @@ class RegistrationController extends Controller
     }
     
 }
+

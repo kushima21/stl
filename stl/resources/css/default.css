@@ -93,15 +93,42 @@
     }
 
     /*user-box*/
-    .user-box {
-        width: 20%;
-        height: 25%;
-        box-shadow: 0px 0px 10px;
-        position: fixed;
-        margin: 13px;
-        border-radius: 12px;
-        display: none;
-    }
+  .user-box {
+    width: 20%;
+    height: 20%;
+    box-shadow: 0px 0px 10px;   
+    position: fixed;
+    margin: 13px;
+    border-radius: 12px;
+    display: none; /* initially hidden */
+    background-color: white; /* add bg color if needed */
+    z-index: 999;
+    top: 19%;
+    cursor: pointer;
+}
+
+.user-settings {
+    width: 90%;
+    min-height: 40px;
+    display: flex;
+    box-shadow: 0px 0px 10px 10px rgba(0, 0, 0, 0.1);
+    margin-top: 10px;
+    margin-left: 13px;
+    border-radius: 7px;
+    align-items: center;
+    padding-left: 10px;
+}
+
+.user-settings h2 {
+    font-size: 14px;
+    padding-top: 10px;
+    padding-left: 5px;
+}
+
+.user-settings i {
+    padding-right: 2px;
+}
+
 
     /*close*/
 
