@@ -1,5 +1,6 @@
 @extends('layout.default')
 @section('content')
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 @vite(['resources/css/registration.css', 'resources/js/app.js'])
      <div class="registration-content-container">
                 <div class="registration-header">
@@ -66,6 +67,16 @@
                     </div>
                 </div>
 
+                <div id="deleteModal" class="modal">
+                    <div class="modal-content">
+                        <p>Are you sure you want to delete this account?</p>
+                        <div class="modal-buttons">
+                            <button onclick="confirmDelete()">Yes, Delete</button>
+                            <button onclick="closeModal()">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="registration-table-container">
                 <h2 class="registration-table-header">Registered Accounts</h2>
                 <table class="registration-table">
@@ -108,7 +119,7 @@
                     </td>
                     <td>
                         <button>Edit</button>
-                        <button>Delete</button>
+                        <button onclick="openModal({{ $registration->id }})">Delete</button>
                     </td>
                 </tr>
                 @endforeach
@@ -143,6 +154,49 @@
             });
         });
     });
+</script>
+<script>
+    let deleteId = null; // Store selected ID
+
+    function openModal(id) {
+        deleteId = id;
+        document.getElementById("deleteModal").style.display = "block";
+    }
+
+    function closeModal() {
+        document.getElementById("deleteModal").style.display = "none";
+    }
+
+    function confirmDelete() {
+        fetch(`/registrations/${deleteId}`, {
+            method: 'DELETE',
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => {
+            if (response.ok) {
+                // Close modal
+                closeModal();
+
+                // Remove the deleted row
+                document.getElementById(`row-${deleteId}`).remove();
+
+                // Show success alert
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Deleted!',
+                    text: 'Delete Account Successfully',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'OK'
+                });
+            } else {
+                Swal.fire('Error', 'Something went wrong', 'error');
+            }
+        });
+    }
 </script>
 
 

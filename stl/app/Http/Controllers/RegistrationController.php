@@ -106,5 +106,13 @@ public function dashboard()
     return response()->json(['success' => true]);
 }
 
+public function destroy($id)
+{
+    $registration = Registration::findOrFail($id);
+    $registration->delete();
+
+    return response()->json(['success' => true]);
+}
+
 }
 

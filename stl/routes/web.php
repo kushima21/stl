@@ -23,4 +23,4 @@ Route::get('/registrations', [RegistrationController::class, 'index'])->name('re
 Route::post('/logout', [RegistrationController::class, 'logout'])->name('logout');
 
 Route::post('/registration/update-status/{id}', [RegistrationController::class, 'updateStatus']);
-
+Route::delete('/registrations/{id}', [RegistrationController::class, 'destroy'])->name('registrations.destroy');

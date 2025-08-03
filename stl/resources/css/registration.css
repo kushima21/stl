@@ -136,7 +136,6 @@
 
 .registration-table th,
 .registration-table td {
-    border: 1px solid #ccc;
     padding: 10px;
     text-align: left;
     cursor: pointer;
@@ -144,10 +143,11 @@
 
 
 .registration-table th {
-    background-color: #f5f5f5;
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 500;
     cursor: pointer;
+    width: max-content;
+    box-shadow: 0px 0px 0px 1px rgba(128, 128, 128, 0.315);
 }
 .registration-table td {
     font-size: 12px;
@@ -217,6 +217,59 @@
       color: #333;
     }
 
+    .modal {
+    display: none;
+    position: fixed;
+    z-index: 999;
+    padding-top: 100px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: auto;
+    padding: 50px;
+    border: 1px solid #888;
+    width: 400px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.modal-buttons button {
+    margin: 0 10px;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    width: 120px;
+    font-size: 14px;
+    height: 40px;
+}
+
+.modal-buttons button:first-child {
+    background: linear-gradient(rgba(107, 9, 9, 0.849)), rgba(255, 68, 0, 0.346);
+    color: white;
+}
+
+.modal-buttons button:last-child {
+    background-color: #ccc;
+}
+
+.close {
+    position: absolute;
+    top: 15%;
+    right: 36%;
+    font-size: 30px;
+    font-weight: bold;
+    color: #000;
+    cursor: pointer;
+}
+
 @media (max-width: 500px) {
     .registration-container {
         top: 45%;
@@ -236,5 +289,10 @@
     .registrationBTn button {
         width: 100%;
         max-width: 200px;
+    }
+
+    .modal-content {
+        width: 90%;
+        padding: 20px;
     }
 }
