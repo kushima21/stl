@@ -15,7 +15,6 @@
 
                 <div class="registration-container">
                     <h2 class="create-header">Register New Account</h2>
-
                     <div class="registration-form">
                         <form method="POST" action="{{ route('register.store') }}">
                             @csrf
@@ -66,6 +65,9 @@
                         </form>
                     </div>
                 </div>
+
+                <div class="registration-table-container">
+                <h2 class="registration-table-header">Registered Accounts</h2>
                 <table class="registration-table">
                 <thead>
                     <tr>
@@ -81,24 +83,67 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($registrations as $registration)
-                        <tr>
-                            <td>{{ $registration->complete_name }}</td>
-                            <td>{{ $registration->username }}</td>
-                            <td>{{ $registration->phone_number }}</td>
-                            <td>{{ $registration->location }}</td>
-                            <td>{{ $registration->area_location }}</td>
-                            <td>{{ $registration->area_name }}</td>
-                            <td>{{ $registration->position }}</td>
-                            <td>{{ ucfirst($registration->status) }}</td>
-                            <td>
-                                <button>Edit</button>
-                                <button>Delete</button>
-                            </td>
-                        </tr>
-                    @endforeach
+                @foreach ($registrations as $registration)
+                <tr>
+                    <td>{{ $registration->complete_name }}</td>
+                    <td>{{ $registration->username }}</td>
+                    <td>{{ $registration->phone_number }}</td>
+                    <td>{{ $registration->location }}</td>
+                    <td>{{ $registration->area_location }}</td>
+                    <td>{{ $registration->area_name }}</td>
+                    <td>{{ $registration->position }}</td>
+                    <td>
+                        <div class="status-toggle-container">
+                            <label class="toggle-switch">
+                                <input type="checkbox" class="animatedSwitch"
+                                    data-id="{{ $registration->id }}"
+                                    {{ $registration->status === 'active' ? 'checked' : '' }}>
+                                <span class="slider"></span>
+                            </label>
+                            <span class="status-label" id="statusText-{{ $registration->id }}"
+                                style="color: {{ $registration->status === 'active' ? '#4CAF50' : '#333' }}">
+                                {{ strtoupper($registration->status === 'active' ? 'ON' : 'OFF') }}
+                            </span>
+                        </div>
+                    </td>
+                    <td>
+                        <button>Edit</button>
+                        <button>Delete</button>
+                    </td>
+                </tr>
+                @endforeach
                 </tbody>
-            </table>
+                </table>
+                </div>
+
             </div>
             </div>
+           <script>
+    document.querySelectorAll('.animatedSwitch').forEach(function (toggle) {
+        toggle.addEventListener('change', function () {
+            const userId = this.dataset.id;
+            const status = this.checked ? 'active' : 'deactive';
+
+            fetch(`/registration/update-status/${userId}`, {
+                method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ status: status })
+            })
+            .then(response => response.json())
+            .then(data => {
+                const statusLabel = document.getElementById(`statusText-${userId}`);
+                statusLabel.textContent = status.toUpperCase();
+                statusLabel.style.color = status === 'active' ? '#4CAF50' : '#333';
+            })
+            .catch(error => {
+                console.error('Error updating status:', error);
+            });
+        });
+    });
+</script>
+
+
 @endsection

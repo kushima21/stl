@@ -35,6 +35,13 @@
                 </div>
             </div>
            <div class="user-box">
+                <a href="#">
+                    <div class="user-settings">
+                        <i class="fa fa-user"></i>
+                        <h2>Personal Informations</h2>
+                    </div>
+                </a>
+
                 <a href="{{ route('logout') }}"
                 onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                     <div class="user-settings">

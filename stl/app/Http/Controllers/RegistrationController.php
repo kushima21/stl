@@ -49,28 +49,32 @@ class RegistrationController extends Controller
     }
 
     // Handle login
-    public function login(Request $request)
-    {
-        $request->validate([
-            'username' => 'required',
-            'password' => 'required',
-        ]);
+   public function login(Request $request)
+{
+    $request->validate([
+        'username' => 'required',
+        'password' => 'required',
+    ]);
 
-        $user = Registration::where('username', $request->username)->first();
+    $user = Registration::where('username', $request->username)->first();
 
-        if ($user && Hash::check($request->password, $user->password)) {
-            // Save session
-            session([
-                'logged_in' => true,
-                'user_id' => $user->id,
-                'username' => $user->username,
-            ]);
-
-            return redirect()->route('dashboard');
+    if ($user && Hash::check($request->password, $user->password)) {
+        if ($user->status !== 'active') {
+            return back()->with('error', 'Account is deactivated. Please contact admin.');
         }
 
-        return back()->with('error', 'Invalid username or password.');
+        session([
+            'logged_in' => true,
+            'user_id' => $user->id,
+            'username' => $user->username,
+        ]);
+
+        return redirect()->route('dashboard');
     }
+
+    return back()->with('error', 'Invalid username or password.');
+}
+
 
     // Show dashboard
 public function dashboard()
@@ -92,6 +96,15 @@ public function dashboard()
         session()->flush();
         return redirect()->route('login');
     }
-    
+
+    public function updateStatus(Request $request, $id)
+{
+    $registration = Registration::findOrFail($id);
+    $registration->status = $request->status;
+    $registration->save();
+
+    return response()->json(['success' => true]);
+}
+
 }
 
